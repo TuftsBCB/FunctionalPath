@@ -1,0 +1,62 @@
+<Building Functional Paths from Gene Ontology file - .obo file>
+
+* Abbreviation
+
+1) BP: biological process
+2) CC: cellular component
+3) MF: molecular function
+
+
+
+* Compiling:
+-> make
+
+
+
+* Correct usage:
+
+Scenario 1) Build all possible functional paths for three categories: BP, CC and MF
+   ./run [path_to_gene_ontology_file]
+
+
+
+Scenario 2) Build all possible functional paths for three categories: BP, CC and MF & identify informative nodes (GO terms that cover more than or equal to (t) number of proteins -> example of functional annotation files are provided in data directory (./data/goBP.list, ./data/goCC.list)
+   ./run [path_to_gene_ontology_file] [t: threshold_for_identifying_informative_nodes] [functional_annotation_file: BP] [functional_annotation_file: CC] [functional_annotation_file: MF]
+	
+Scenario 3) Same as Scenario 2), but you can add "-v" flag at the end to get logs
+	./run [path_to_gene_ontology_file] [t: threshold_for_identifying_informative_nodes] [functional_annotation_file: BP] [functional_annotation_file: CC] [functional_annotation_file: MF] -v
+
+!!! For Scenario 2) and 3), the number of functional annotation files does not need to be 3. You can provide UP TO 3 functional annotation files.
+
+
+   
+* Output files:
+-> In the working directory, three files will be generated:	
+	BP.path, CC.path, MF.path
+
+Scenario 1) 
+	All of these files will NOT contains any information about informative nodes
+
+Scenario 2) In the working directory, three files will be generated:
+	In the file for a category of which functional annotation information was provided, each token will have suffices indicating whether the represented Go term is informative (i) or not (n).
+	In the file for a category of which functional annotation information was NOT provided, all tokens will have suffices "(n)" - these suffices tell us nothing and should be neglected.
+	
+Scenario 3) In the working directory, three files will be generated same as Scenario 2).
+	    In addition to that, it will generate protein.counts.* file for each category of which annotation file was given. 
+	    Also, in *.path files, each GO term will have number of proteins that it covers at the end.
+
+
+
+* Input files:
+-> GO file: gene ontology file downloaded from GO website (gene_ontology.1_2.obo without "ext" in the file name)
+-> Functional annotation file: list of pairs -> [protein] \t [GO term] without duplicates
+
+
+
+* Questions and troubleshooting
+-> email me: jisoo.park@tufts.edu
+
+	
+
+* example of execution:
+./run /r/bcb/DSD/ISMB2014/raw-data/GO/GeneOntology/gene_ontology.1_2.obo 50 /r/bcb/DSD/ISMB2014/raw-data/GO/GeneOntology/Baker.go.nr.list

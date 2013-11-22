@@ -1,0 +1,37 @@
+<Evalution using functional paths>
+
+* Usage:
+
+-> ./run [path_to_directory_containing_ predictionfiles] [path_to_known_annotation_file] [path_to_functional_path_file]
+-> i.e., ./run ./prediction_results/DSDunweighted/ ./prediction_results/trueannotations.list ./functional_path/BP.path
+
+1) Place a folder that contains prediction result files in "prediction_results".
+2) Path to output files: evaluation_results.
+3) For example, if you execute "./run ./prediction_results/DSDunweighted/ ./prediction_results/trueannotations.list ./functional_path/BP.path", you can find output files in ./evaluation_results/DSDunweighted/.
+
+
+
+* Format of input file
+- Each GO term should be delimited by tab ("\t").
+- In prediction set, there is no space between function (GO term) and the score bracket.
+-> i.e., (for true annotation) YGR140W   GO:0006996   GO:0007049   GO:0022402
+-> i.e., (for prediction) YGR140W   GO:0006996(12)   GO:0043170(12)   GO:0050794(5)   GO:0044260(2)   GO:0051716(1)   GO:0007049(1)   GO:1901360(1)   GO:1901576(1)   GO:0006468(1)
+          This example was grabbed from GMC results.
+
+
+
+* Format of output file
+
+1) Name of output file: the output file will have the same name as input file except for the extension.
+	*.count -> evaluation results using counting method
+	*.depth -> evaluation results using depth of shared node
+
+2) In each file, 
+	the first line is averaged precision and recall.
+	from the second line:
+		[protein] [precision] [recall]	
+		
+
+
+* Questions and Troubleshooting
+-> email me: jisoo.park@tufts.edu

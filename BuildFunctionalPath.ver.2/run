@@ -1,0 +1,4 @@
+#!/bin/bash
+# Generate geneset files, rankedlist files, chip annotation files
+
+java -ea -cp ./bin Build $1 $2 $3 $4 $5
